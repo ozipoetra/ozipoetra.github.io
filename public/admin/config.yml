@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: ozipoetra/ozipoetra.github.io
+  base_url: https://auth-login.ozip.my.id
+  branch: main
+  commit_messages:
+    create: Create {{collection}} "{{slug}}"
+    update: Update {{collection}} "{{slug}}"
+    delete: Delete {{collection}} "{{slug}}"
+    uploadMedia: Upload "{{path}}"
+    deleteMedia: Delete "{{path}}"
+
+site_url: https://ozipoetra.github.io
+logo_url: https://github.com/ozipoetra.png
+publish_mode: editorial_workflow
+media_folder: 'src/assets/images'
+public_folder: '/_astro'
+
+collections:
+  - name: 'post'
+    label: 'Post'
+    folder: 'src/content/post'
+    create: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Excerpt', name: 'excerpt', widget: 'string' }
+      - { label: 'Category', name: 'category', widget: 'string' }
+      - {
+          label: 'Tags',
+          name: 'tags',
+          widget: 'list',
+          allow_add: true,
+          allow_delete: true,
+          collapsed: false,
+          field: { label: 'Tag', name: 'tag', widget: 'string' },
+        }
+      - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Publish Date', name: 'publishDate', widget: 'datetime', required: false }
+      - { label: 'Author', name: 'author', widget: 'string' }
+      - { label: 'Content', name: 'body', widget: 'markdown' }
