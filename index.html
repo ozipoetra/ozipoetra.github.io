@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/en/"><link rel="canonical" href="https://example.com/en/"><meta name="robots" content="noindex"><title>Redirecting...</title><script>
+      (function () {
+        var locales = ['en', 'id', 'zh-CN', 'ru'];
+        var defaultLocale = 'en';
+
+        // 1. Check localStorage first (user's saved preference)
+        var saved = localStorage.getItem('preferred-locale');
+        if (saved && locales.indexOf(saved) !== -1) {
+          window.location.replace('/' + saved + '/');
+          return;
+        }
+
+        // 2. Check browser Accept-Language
+        var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage];
+        for (var i = 0; i < browserLangs.length; i++) {
+          var lang = browserLangs[i];
+          // Exact match (e.g., "zh-CN")
+          if (locales.indexOf(lang) !== -1) {
+            window.location.replace('/' + lang + '/');
+            return;
+          }
+          // Prefix match (e.g., "zh" matches "zh-CN")
+          var prefix = lang.split('-')[0];
+          for (var j = 0; j < locales.length; j++) {
+            if (locales[j].toLowerCase().indexOf(prefix.toLowerCase()) === 0) {
+              window.location.replace('/' + locales[j] + '/');
+              return;
+            }
+          }
+        }
+
+        // 3. Fallback to English
+        window.location.replace('/' + defaultLocale + '/');
+      })();
+    </script></head> <body> <a href="/en/">Redirecting to /en/...</a> </body></html>

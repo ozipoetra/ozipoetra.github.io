@@ -1,0 +1,201 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: OWNER/REPO
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+i18n:
+  structure: multiple_folders
+  locales: [en, id, zh-CN, ru]
+  default_locale: en
+  omit_default_locale_from_file_path: true
+  omit_default_locale_from_preview_path: true
+
+collections:
+  - name: blog
+    label: Blog Posts
+    folder: src/content/blog
+    preview_path: "/{{locale}}/blog/{{slug}}"
+    i18n: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+        i18n: true
+      - name: description
+        label: Description
+        widget: text
+        i18n: true
+      - name: pubDate
+        label: Publish Date
+        widget: datetime
+        i18n: false
+      - name: updatedDate
+        label: Updated Date
+        widget: datetime
+        i18n: false
+        required: false
+      - name: heroImage
+        label: Hero Image
+        widget: image
+        i18n: false
+        required: false
+      - name: category
+        label: Category
+        widget: select
+        i18n: false
+        required: false
+        options:
+          - tutorial
+          - opinion
+          - news
+          - update
+          - review
+      - name: tags
+        label: Tags
+        widget: list
+        i18n: true
+        allow_add: true
+      - name: body
+        label: Body
+        widget: markdown
+        i18n: true
+
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    preview_path: "/{{locale}}/projects/{{slug}}"
+    i18n: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+        i18n: true
+      - name: description
+        label: Description
+        widget: text
+        i18n: true
+      - name: icon
+        label: Icon
+        widget: string
+        i18n: false
+        default: "🚀"
+      - name: technologies
+        label: Technologies
+        widget: list
+        i18n: false
+        allow_add: true
+      - name: github
+        label: GitHub URL
+        widget: string
+        i18n: false
+        required: false
+      - name: demo
+        label: Demo URL
+        widget: string
+        i18n: false
+        required: false
+      - name: heroImage
+        label: Hero Image
+        widget: image
+        i18n: false
+        required: false
+      - name: featured
+        label: Featured
+        widget: boolean
+        i18n: false
+        default: false
+      - name: order
+        label: Sort Order
+        widget: number
+        i18n: false
+        default: 0
+      - name: body
+        label: Body
+        widget: markdown
+        i18n: true
+
+  - name: pages
+    label: Pages
+    folder: src/content/pages
+    i18n: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+        i18n: true
+      - name: description
+        label: Description
+        widget: text
+        i18n: true
+      - name: layout
+        label: Layout
+        widget: select
+        i18n: false
+        options:
+          - hero
+          - content
+          - sidebar
+        default: content
+      - name: heroImage
+        label: Hero Image
+        widget: image
+        i18n: false
+        required: false
+      - name: body
+        label: Body
+        widget: markdown
+        i18n: true
+
+  - name: settings
+    label: Site Settings
+    files:
+      - name: general
+        label: General
+        file: src/content/settings/general.yml
+        fields:
+          - name: site_title
+            label: Site Title
+            widget: string
+          - name: site_description
+            label: Site Description
+            widget: text
+          - name: social_links
+            label: Social Links
+            widget: list
+            fields:
+              - name: platform
+                label: Platform
+                widget: select
+                options:
+                  - github
+                  - twitter
+                  - linkedin
+              - name: url
+                label: URL
+                widget: string
+          - name: hero_tagline
+            label: Hero Tagline
+            widget: string
+          - name: hero_title
+            label: Hero Title
+            widget: string
+          - name: hero_description
+            label: Hero Description
+            widget: text
+          - name: contact_email
+            label: Contact Email
+            widget: string
+          - name: newsletter_title
+            label: Newsletter Title
+            widget: string
+          - name: newsletter_description
+            label: Newsletter Description
+            widget: text
+          - name: newsletter_readers
+            label: Newsletter Readers Count
+            widget: string
