@@ -3,7 +3,7 @@
 backend:
   name: github
   base_url: https://sveltia-cms-auth.ozi.workers.dev
-  repo: ozipoetra/ozipoetra-blog
+  repo: ozipoetra/astro-blog
   branch: main
   commit_messages:
     create: Create {{collection}} "{{slug}}"
