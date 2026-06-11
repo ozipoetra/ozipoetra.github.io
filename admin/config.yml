@@ -12,8 +12,8 @@ backend:
     uploadMedia: Upload "{{path}}"
     deleteMedia: Delete "{{path}}"
 
-media_folder: "src/content/blog/@media"
-public_folder: "@media"
+media_folder: "/src/assets/media"
+public_folder: "@/assets/media"
 
 i18n:
   structure: multiple_folders
