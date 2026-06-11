@@ -19,8 +19,6 @@ i18n:
   structure: multiple_folders
   locales: [en, id, zh-CN, ru]
   default_locale: en
-  omit_default_locale_from_file_path: true
-  omit_default_locale_from_preview_path: true
 
 collections:
   - name: blog
