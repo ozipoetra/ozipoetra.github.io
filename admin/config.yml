@@ -2,7 +2,7 @@
 
 backend:
   name: github
-  repo: OWNER/REPO
+  repo: ozipoetra/astro-blog
   branch: main
 
 media_folder: "public/images/uploads"
