@@ -13,7 +13,7 @@ backend:
     deleteMedia: Delete "{{path}}"
 
 media_folder: "src/content/blog/@media"
-public_folder: "../@media"
+public_folder: "@media"
 
 i18n:
   structure: multiple_folders
