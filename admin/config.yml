@@ -21,6 +21,16 @@ i18n:
   default_locale: en
 
 collections:
+  - name: tags
+    label: Tags
+    folder: src/content/tags
+    slug: "{{slug}}"
+    create: true
+    fields:
+      - name: title
+        label: Tag Name
+        widget: string
+
   - name: blog
     label: Blog Posts
     folder: src/content/blog
@@ -62,9 +72,13 @@ collections:
           - review
       - name: tags
         label: Tags
-        widget: list
-        i18n: true
-        allow_add: true
+        widget: relation
+        collection: tags
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        multiple: true
+        i18n: false
       - name: body
         label: Body
         widget: markdown
