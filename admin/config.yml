@@ -57,7 +57,7 @@ collections:
       - name: heroImage
         label: Hero Image
         widget: image
-        i18n: false
+        i18n: true
         required: false
       - name: category
         label: Category
