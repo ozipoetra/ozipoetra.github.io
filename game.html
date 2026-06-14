@@ -3,65 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contra Arcade - Online Co-Op</title>
+    <title>Contra - Online Co-Op</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg: #0f172a;
+            --card: #1e293b;
             --accent: #6366f1;
-            --accent-hover: #4f46e5;
             --text: #f8fafc;
-            --text-secondary: #94a3b8;
+            --muted: #94a3b8;
         }
+        * { box-sizing: border-box; }
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
+            margin: 0; padding: 0;
+            background: var(--bg);
             color: var(--text);
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: system-ui, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
         header {
-            width: 100%;
-            max-width: 960px;
-            padding: 20px;
-            box-sizing: border-box;
+            width: 100%; max-width: 960px;
+            padding: 24px 20px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
-        h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
-        .info-card {
-            background: var(--card-bg);
+        h1 { margin: 0; font-size: 1.4rem; }
+        .tip {
+            background: var(--card);
+            border: 1px solid rgba(99,102,241,0.3);
+            border-radius: 10px;
             padding: 10px 16px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
         }
-        .info-card span { color: #38bdf8; font-weight: 600; }
+        .tip strong { color: #38bdf8; }
         .game-wrapper {
             width: 100%;
             max-width: 960px;
             aspect-ratio: 4 / 3;
             background: #000;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
             touch-action: manipulation;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
         }
         #game-container { width: 100%; height: 100%; }
         @media (min-width: 768px) {
             body { padding-bottom: 40px; }
-            header { padding: 30px 10px 20px 10px; }
             .game-wrapper {
                 border-radius: 16px;
                 overflow: hidden;
-                border: 1px solid rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.06);
             }
         }
     </style>
@@ -69,11 +65,12 @@
 <body>
 
 <header>
-    <div>
-        <h1>Contra (Online Co-Op)</h1>
-    </div>
-    <div class="info-card">
-        To play online: Start game → click <span>🌐</span> in menu → share the room link with your friend
+    <h1>🕹️ Contra (Online Co-Op)</h1>
+    <div class="tip">
+        <strong>How to play online:</strong><br>
+        1. Start the game &nbsp;→&nbsp;
+        2. Click <strong>🌐</strong> in the emulator toolbar &nbsp;→&nbsp;
+        3. Copy the room link &amp; send to your friend
     </div>
 </header>
 
@@ -82,31 +79,39 @@
 </div>
 
 <script>
-    // ── EmulatorJS Core Config ─────────────────────────────────────────────
-    window.EJS_player      = '#game-container';
-    window.EJS_core        = 'nes';
-    window.EJS_gameUrl     = 'https://huggingface.co/buckets/ozipoetra/Tedt/resolve/Contra%20(U).nes?download=true';
-    window.EJS_pathtodata  = 'https://cdn.emulatorjs.org/stable/data/';
-    window.EJS_gameID      = 1001; // Unique ID required for netplay room matching
+    // ── Core config ─────────────────────────────────────────────────────────
+    window.EJS_player       = '#game-container';
+    window.EJS_core         = 'nes';
+    window.EJS_gameUrl      = 'https://huggingface.co/buckets/ozipoetra/Tedt/resolve/Contra%20(U).nes?download=true';
     window.EJS_startOnLoaded = false;
 
-    // ── Netplay Config ─────────────────────────────────────────────────────
-    // IMPORTANT: Replace the URL below with your own self-hosted netplay server.
-    // Clone and run: https://github.com/EmulatorJS/EmulatorJS-Netplay
-    window.EJS_netplayServer = 'https://YOUR_SERVER_IP:3000';
+    // ── IMPORTANT: Use NIGHTLY — stable build does NOT have netplay yet ─────
+    window.EJS_pathtodata   = 'https://cdn.emulatorjs.org/nightly/data/';
 
-    // Free STUN + TURN servers for WebRTC hole-punching
+    // ── Netplay config ──────────────────────────────────────────────────────
+    // EJS_gameID is required — must be a unique number per game on your site
+    window.EJS_gameID       = 1001;
+
+    // Replace this with your own self-hosted netplay server URL:
+    // git clone https://github.com/EmulatorJS/EmulatorJS-Netplay
+    // node index.js   (runs on port 3000 by default)
+    window.EJS_netplayServer = 'https://game.ozip.qzz.io';
+
+    // Free STUN + TURN servers for WebRTC NAT traversal
     window.EJS_netplayICEServers = [
         { urls: 'stun:stun.l.google.com:19302' },
         { urls: 'stun:stun1.l.google.com:19302' },
         { urls: 'stun:stun2.l.google.com:19302' },
         { urls: 'stun:stun.nextcloud.com:3478' },
-        { urls: 'turn:openrelay.metered.ca:80',  username: 'openrelayproject', credential: 'openrelayproject' },
-        { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' }
+        { urls: 'turn:openrelay.metered.ca:80',
+          username: 'openrelayproject', credential: 'openrelayproject' },
+        { urls: 'turn:openrelay.metered.ca:443',
+          username: 'openrelayproject', credential: 'openrelayproject' }
     ];
 </script>
 
-<script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+<!-- Load from NIGHTLY so the netplay 🌐 button actually exists -->
+<script src="https://cdn.emulatorjs.org/nightly/data/loader.js"></script>
 
 </body>
 </html>
