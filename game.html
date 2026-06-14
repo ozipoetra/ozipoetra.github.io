@@ -108,44 +108,6 @@
 
 <!-- Load from NIGHTLY so the netplay 🌐 button actually exists -->
 <script src="https://cdn.emulatorjs.org/nightly/data/loader.js"></script>
-
-<script>
-// Fix: EmulatorJS netplay video autoplay is blocked by browsers.
-// We watch for the hidden <video> element the guest receives the stream on,
-// then force-play it after any user gesture on the page.
-
-(function () {
-    let fixed = false;
-
-    function tryFixVideo() {
-        if (fixed) return;
-
-        // EmulatorJS injects a <video> with a srcObject (the WebRTC stream) for guests
-        const videos = document.querySelectorAll('video');
-        videos.forEach(function (v) {
-            if (v.srcObject && v.paused) {
-                v.play().then(function () {
-                    console.log('[Netplay] Video stream started playing.');
-                    fixed = true;
-                }).catch(function (e) {
-                    console.warn('[Netplay] Video play() failed:', e);
-                });
-            }
-        });
-    }
-
-    // Poll for the video element — it's injected dynamically after WebRTC connects
-    const poll = setInterval(function () {
-        tryFixVideo();
-        if (fixed) clearInterval(poll);
-    }, 500);
-
-    // Also trigger on any user gesture as a fallback
-    ['click', 'keydown', 'touchstart'].forEach(function (evt) {
-        document.addEventListener(evt, tryFixVideo, { once: false });
-    });
-})();
-</script>
     
 </body>
 </html>
