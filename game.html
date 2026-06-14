@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contra Arcade - Multiplayer</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --text: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            max-width: 960px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .controls-card {
+            background: var(--card-bg);
+            padding: 8px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .room-badge {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #38bdf8;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Aspect-Ratio Box enforces responsive strictness */
+        .game-wrapper {
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 4 / 3;
+            background: #000;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        #game-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+            body { padding-bottom: 40px; }
+            header { padding: 30px 10px 20px 10px; }
+            .game-wrapper {
+                border-radius: 16px;
+                overflow: hidden;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>Contra (Online Co-Op)</h1>
+        </div>
+        
+        <div class="controls-card">
+            <span id="room-status" class="status-label">Initializing...</span>
+            <div id="room-display" class="room-badge" style="display: none;"></div>
+            <button id="invite-btn" class="btn" style="display: none;" onclick="copyInviteLink()">Copy Invite Link</button>
+        </div>
+    </header>
+
+    <div class="game-wrapper">
+        <div id="game-container"></div>
+    </div>
+
+    <script>
+        // 1. Parsing Modes and Routing Data
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentRoom = urlParams.get('room');
+        const mode = urlParams.get('mode');
+
+        const isGuest = !!currentRoom;
+        const isMultiplayer = isGuest || mode === 'multiplayer';
+
+        const statusText = document.getElementById('room-status');
+        const roomDisplay = document.getElementById('room-display');
+        const inviteBtn = document.getElementById('invite-btn');
+        const controlsCard = document.querySelector('.controls-card');
+
+        if (isMultiplayer) {
+            if (!currentRoom) {
+                currentRoom = crypto.randomUUID(); 
+            }
+            roomDisplay.innerText = `${currentRoom.substring(0, 8)}...`;
+            roomDisplay.title = currentRoom;
+            roomDisplay.style.display = "block";
+            statusText.innerText = isGuest ? "Joining Room:" : "Hosting Room:";
+            if (!isGuest) inviteBtn.style.display = "block";
+        } else {
+            controlsCard.innerHTML = `
+                <span class="status-label">Mode: Solo Play</span>
+                <button class="btn" style="background:#475569;" onclick="startMultiplayerSession()">Go Online</button>
+            `;
+        }
+
+        // 2. STABLE EMULATOR CONFIGURATION FIXED MAPPINGS
+        window.EJS_player = '#game-container';
+        window.EJS_gameUrl = 'https://huggingface.co/buckets/ozipoetra/Tedt/resolve/Contra%20(U).nes?download=true'; 
+        
+        // CRITICAL FIX: Swap out jsdelivr latest for the official stable CDN path tracking
+        window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'; 
+        
+        window.EJS_core = 'nes';
+        window.EJS_gameID = 'contra_nes_1001'; 
+
+        // USER INTERACTION SAFETY: Force a splash button overlay to build audio context correctly
+        window.EJS_startOnLoaded = false; 
+
+        // 3. Selective Network Layer Initialization
+        if (isMultiplayer) {
+            window.EJS_netplay = {
+                enabled: true,
+                server: 'wss://game.ozip.qzz.io', // Change this to your live address
+                room: currentRoom,
+                iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+            };
+        }
+
+        // 4. Interface Mechanics Action Logic
+        function copyInviteLink() {
+            const inviteUrl = `${window.location.origin}${window.location.pathname}?room=${currentRoom}`;
+            navigator.clipboard.writeText(inviteUrl).then(() => {
+                const origText = inviteBtn.innerText;
+                inviteBtn.innerText = "Copied URL!";
+                inviteBtn.style.background = "#10b981";
+                setTimeout(() => {
+                    inviteBtn.innerText = origText;
+                    inviteBtn.style.background = "";
+                }, 2000);
+            }).catch(err => console.error(err));
+        }
+
+        function startMultiplayerSession() {
+            const hostRoom = crypto.randomUUID();
+            window.location.search = `?mode=multiplayer&room=${hostRoom}`;
+        }
+    </script>
+
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
+</body>
+</html>
