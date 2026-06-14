@@ -94,6 +94,8 @@
             background: #000;
             position: relative;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            /* PERFORMANCE FIX: Prevents mobile 300ms double-tap delay on virtual touch buttons */
+            touch-action: manipulation; 
         }
 
         #game-container {
@@ -164,20 +166,20 @@
         window.EJS_player = '#game-container';
         window.EJS_gameUrl = 'https://huggingface.co/buckets/ozipoetra/Tedt/resolve/Contra%20(U).nes?download=true'; 
         
-        // CRITICAL FIX: Swap out jsdelivr latest for the official stable CDN path tracking
+        // Verified stable CDN asset delivery path tracking
         window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'; 
         
         window.EJS_core = 'nes';
         window.EJS_gameID = 'contra_nes_1001'; 
 
-        // USER INTERACTION SAFETY: Force a splash button overlay to build audio context correctly
+        // Force a splash play button overlay to handle modern WebAudio context unlocks cleanly
         window.EJS_startOnLoaded = false; 
 
         // 3. Selective Network Layer Initialization
         if (isMultiplayer) {
             window.EJS_netplay = {
                 enabled: true,
-                server: 'wss://game.ozip.qzz.io', // Change this to your live address
+                server: 'wss://game.ozip.qzz.io', 
                 room: currentRoom,
                 iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
             };
@@ -185,6 +187,7 @@
 
         // 4. Interface Mechanics Action Logic
         function copyInviteLink() {
+            // Robust cleaner URL compiler logic
             const inviteUrl = `${window.location.origin}${window.location.pathname}?room=${currentRoom}`;
             navigator.clipboard.writeText(inviteUrl).then(() => {
                 const origText = inviteBtn.innerText;
@@ -194,12 +197,13 @@
                     inviteBtn.innerText = origText;
                     inviteBtn.style.background = "";
                 }, 2000);
-            }).catch(err => console.error(err));
+            }).catch(err => console.error("Clipboard blocked or failed:", err));
         }
 
         function startMultiplayerSession() {
             const hostRoom = crypto.randomUUID();
-            window.location.search = `?mode=multiplayer&room=${hostRoom}`;
+            // Re-routing cleanly without accumulating broken historical search strings
+            window.location.href = `${window.location.origin}${window.location.pathname}?mode=multiplayer&room=${hostRoom}`;
         }
     </script>
 
