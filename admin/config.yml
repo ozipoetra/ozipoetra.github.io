@@ -57,7 +57,7 @@ collections:
       - name: heroImage
         label: Hero Image
         widget: image
-        i18n: true
+        i18n: duplicate
         required: false
       - name: category
         label: Category
