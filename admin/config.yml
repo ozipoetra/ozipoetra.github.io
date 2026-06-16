@@ -72,12 +72,7 @@ collections:
           - review
       - name: tags
         label: Tags
-        widget: relation
-        collection: tags
-        value_field: "{{slug}}"
-        search_fields: [title]
-        display_fields: [title]
-        multiple: true
+        widget: list
         i18n: duplicate
       - name: body
         label: Body
