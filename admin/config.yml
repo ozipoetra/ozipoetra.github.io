@@ -298,19 +298,17 @@ collections:
           - name: locales
             label: Languages
             widget: list
+            allow_add: false
             fields:
               - name: code
                 label: Language Code
                 widget: string
-                hint: "e.g. en, id, zh-CN, ru"
               - name: name
                 label: Language Name
                 widget: string
-                hint: "e.g. English, Bahasa Indonesia"
               - name: label
                 label: Short Label
                 widget: string
-                hint: "e.g. EN, ID, 中文, RU"
               - name: enabled
                 label: Enabled
                 widget: boolean
@@ -350,39 +348,6 @@ collections:
             default_language: json
       - name: translations_ru
         label: "Translations: Русский"
-        file: src/i18n/ru.json
-        format: raw
-        fields:
-          - name: body
-            label: "Русский Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
-      - name: id
-        label: "Bahasa Indonesia"
-        file: src/i18n/id.json
-        format: raw
-        fields:
-          - name: body
-            label: "Bahasa Indonesia Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
-      - name: zh-CN
-        label: "简体中文"
-        file: src/i18n/zh-CN.json
-        format: raw
-        fields:
-          - name: body
-            label: "简体中文 Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
-      - name: ru
-        label: "Русский"
         file: src/i18n/ru.json
         format: raw
         fields:
