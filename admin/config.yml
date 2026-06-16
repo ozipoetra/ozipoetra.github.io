@@ -284,3 +284,35 @@ collections:
           - name: newsletter_readers
             label: Newsletter Readers Text
             widget: string
+      - name: i18n
+        label: Languages
+        file: src/content/settings/i18n.yml
+        fields:
+          - name: default_locale
+            label: Default Language
+            widget: select
+            options:
+              - en
+              - id
+              - zh-CN
+              - ru
+          - name: locales
+            label: Languages
+            widget: list
+            fields:
+              - name: code
+                label: Language Code
+                widget: string
+                hint: "e.g. en, id, zh-CN, ru"
+              - name: name
+                label: Language Name
+                widget: string
+                hint: "e.g. English, Bahasa Indonesia"
+              - name: label
+                label: Short Label
+                widget: string
+                hint: "e.g. EN, ID, 中文, RU"
+              - name: enabled
+                label: Enabled
+                widget: boolean
+                default: true

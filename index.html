@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/en/"><link rel="canonical" href="https://ozipoetra.github.io/en/"><meta name="robots" content="noindex"><title>Redirecting...</title><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/en/"><link rel="canonical" href="https://ozipoetra.github.io/en/"><meta name="robots" content="noindex"><title>Redirecting...</title><script>(function(){const enabledLocales = ["en","id","zh-CN"];
+const defaultLocale = "en";
+
       (function () {
-        var locales = ['en', 'id', 'zh-CN', 'ru'];
-        var defaultLocale = 'en';
+        var locales = enabledLocales;
 
         // 1. Check localStorage first (user's saved preference)
         var saved = localStorage.getItem('preferred-locale');
@@ -29,7 +30,7 @@
           }
         }
 
-        // 3. Fallback to English
+        // 3. Fallback to default locale
         window.location.replace('/' + defaultLocale + '/');
       })();
-    </script></head> <body> <a href="/en/">Redirecting to /en/...</a> </body></html>
+    })();</script></head> <body> <a href="/en/">Redirecting to /en/...</a> </body></html>
