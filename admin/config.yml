@@ -212,6 +212,7 @@ collections:
           - name: profile_picture
             label: Profile Picture
             widget: image
+            allow_multiple: false
             media_library:
               config:
                 max_file_size: 5120000
@@ -315,19 +316,46 @@ collections:
                 label: Enabled
                 widget: boolean
                 default: true
-
-  - name: translations
-    label: Translations
-    editor:
-      preview: false
-    files:
-      - name: en
-        label: "English"
+      - name: translations_en
+        label: "Translations: English"
         file: src/i18n/en.json
         format: raw
         fields:
           - name: body
             label: "English Translations"
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+            default_language: json
+      - name: translations_id
+        label: "Translations: Bahasa Indonesia"
+        file: src/i18n/id.json
+        format: raw
+        fields:
+          - name: body
+            label: "Bahasa Indonesia Translations"
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+            default_language: json
+      - name: translations_zhcn
+        label: "Translations: 简体中文"
+        file: src/i18n/zh-CN.json
+        format: raw
+        fields:
+          - name: body
+            label: "简体中文 Translations"
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+            default_language: json
+      - name: translations_ru
+        label: "Translations: Русский"
+        file: src/i18n/ru.json
+        format: raw
+        fields:
+          - name: body
+            label: "Русский Translations"
             widget: code
             output_code_only: true
             allow_language_selection: false
