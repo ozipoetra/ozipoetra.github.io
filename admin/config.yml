@@ -237,39 +237,16 @@ collections:
             label: Website
             widget: string
             required: false
-      - name: general
-        label: Content Settings
+      - name: homepage
+        label: Home Page Settings
         file: src/content/settings/general.yml
         fields:
-          - name: site_title
-            label: Site Title
-            widget: string
-          - name: site_description
-            label: Site Description
-            widget: text
-          - name: social_links
-            label: Social Links
-            widget: list
-            fields:
-              - name: platform
-                label: Platform
-                widget: select
-                options:
-                  - github
-                  - twitter
-                  - linkedin
-              - name: url
-                label: URL
-                widget: string
           - name: hero_tagline
             label: Hero Tagline
             widget: string
           - name: hero_title
             label: Hero Title
             widget: string
-          - name: hero_description
-            label: Hero Description
-            widget: text
           - name: hero_button1_text
             label: Hero Button 1 Text
             widget: string
@@ -288,20 +265,12 @@ collections:
           - name: about_title
             label: About Title
             widget: string
-          - name: about_bio1
-            label: About Bio 1
-            widget: text
           - name: about_bio2
-            label: About Bio 2
+            label: About Bio (extra)
             widget: text
+            required: false
           - name: about_button_text
             label: About Button Text
-            widget: string
-          - name: footer_tagline
-            label: Footer Tagline
-            widget: string
-          - name: contact_email
-            label: Contact Email
             widget: string
           - name: newsletter_title
             label: Newsletter Title
