@@ -314,46 +314,46 @@ collections:
                 widget: boolean
                 default: true
       - name: translations_en
-        label: "Translations: English"
+        label: "English Translations"
         file: src/i18n/en.json
-        format: raw
+        format: json
         fields:
-          - name: body
-            label: "English Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
+          - name: translations
+            label: Translations
+            widget: keyvalue
+            root: true
+            key_label: Key
+            value_label: Value
       - name: translations_id
-        label: "Translations: Bahasa Indonesia"
+        label: "Bahasa Indonesia Translations"
         file: src/i18n/id.json
-        format: raw
+        format: json
         fields:
-          - name: body
-            label: "Bahasa Indonesia Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
+          - name: translations
+            label: Translations
+            widget: keyvalue
+            root: true
+            key_label: Key
+            value_label: Value
       - name: translations_zhcn
-        label: "Translations: 简体中文"
+        label: "简体中文 Translations"
         file: src/i18n/zh-CN.json
-        format: raw
+        format: json
         fields:
-          - name: body
-            label: "简体中文 Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
+          - name: translations
+            label: Translations
+            widget: keyvalue
+            root: true
+            key_label: Key
+            value_label: Value
       - name: translations_ru
-        label: "Translations: Русский"
+        label: "Русский Translations"
         file: src/i18n/ru.json
-        format: raw
+        format: json
         fields:
-          - name: body
-            label: "Русский Translations"
-            widget: code
-            output_code_only: true
-            allow_language_selection: false
-            default_language: json
+          - name: translations
+            label: Translations
+            widget: keyvalue
+            root: true
+            key_label: Key
+            value_label: Value
