@@ -48,11 +48,11 @@ collections:
       - name: pubDate
         label: Publish Date
         widget: datetime
-        i18n: false
+        i18n: duplicate
       - name: updatedDate
         label: Updated Date
         widget: datetime
-        i18n: false
+        i18n: duplicate
         required: false
       - name: heroImage
         label: Hero Image
@@ -62,7 +62,7 @@ collections:
       - name: category
         label: Category
         widget: select
-        i18n: false
+        i18n: duplicate
         required: false
         options:
           - tutorial
@@ -78,7 +78,7 @@ collections:
         search_fields: [title]
         display_fields: [title]
         multiple: true
-        i18n: false
+        i18n: duplicate
       - name: body
         label: Body
         widget: markdown
