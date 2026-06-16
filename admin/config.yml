@@ -210,8 +210,13 @@ collections:
             label: Bio
             widget: text
           - name: profile_picture
-            label: Profile Picture URL
-            widget: string
+            label: Profile Picture
+            widget: image
+            allow_multiple: false
+            media_library:
+              config:
+                max_file_size: 5120000
+                multiple: false
           - name: profile_github
             label: GitHub URL
             widget: string
