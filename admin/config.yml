@@ -158,6 +158,44 @@ collections:
   - name: settings
     label: Site Settings
     files:
+      - name: site
+        label: Site
+        file: src/content/settings/general.yml
+        fields:
+          - name: site_title
+            label: Site Title
+            widget: string
+          - name: site_tagline
+            label: Site Tagline
+            widget: string
+          - name: site_description
+            label: Site Description
+            widget: text
+      - name: navbar
+        label: Navbar
+        file: src/content/settings/general.yml
+        fields:
+          - name: navbar_items
+            label: Navigation Links
+            widget: list
+            fields:
+              - name: label
+                label: Label
+                widget: string
+              - name: path
+                label: Path
+                widget: string
+          - name: navbar_show_search
+            label: Show Search
+            widget: boolean
+            default: true
+          - name: navbar_show_contact
+            label: Show Contact Button
+            widget: boolean
+            default: true
+          - name: navbar_contact_text
+            label: Contact Button Text
+            widget: string
       - name: profile
         label: Profile
         file: src/content/settings/general.yml
