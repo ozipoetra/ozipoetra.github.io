@@ -315,35 +315,3 @@ collections:
                 label: Enabled
                 widget: boolean
                 default: true
-      - name: translations_en
-        label: "Translations: English"
-        file: src/i18n/en.json
-        fields:
-          - name: translations
-            label: Translations (JSON)
-            widget: code
-            language: json
-      - name: translations_id
-        label: "Translations: Bahasa Indonesia"
-        file: src/i18n/id.json
-        fields:
-          - name: translations
-            label: Translations (JSON)
-            widget: code
-            language: json
-      - name: translations_zhcn
-        label: "Translations: 简体中文"
-        file: src/i18n/zh-CN.json
-        fields:
-          - name: translations
-            label: Translations (JSON)
-            widget: code
-            language: json
-      - name: translations_ru
-        label: "Translations: Русский"
-        file: src/i18n/ru.json
-        fields:
-          - name: translations
-            label: Translations (JSON)
-            widget: code
-            language: json
