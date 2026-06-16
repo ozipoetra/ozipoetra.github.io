@@ -212,7 +212,6 @@ collections:
           - name: profile_picture
             label: Profile Picture
             widget: image
-            allow_multiple: false
             media_library:
               config:
                 max_file_size: 5120000
