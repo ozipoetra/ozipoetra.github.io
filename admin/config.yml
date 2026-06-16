@@ -158,8 +158,44 @@ collections:
   - name: settings
     label: Site Settings
     files:
+      - name: profile
+        label: Profile
+        file: src/content/settings/general.yml
+        fields:
+          - name: profile_name
+            label: Display Name
+            widget: string
+          - name: profile_username
+            label: Username
+            widget: string
+          - name: profile_bio
+            label: Bio
+            widget: text
+          - name: profile_picture
+            label: Profile Picture URL
+            widget: string
+          - name: profile_github
+            label: GitHub URL
+            widget: string
+          - name: profile_twitter
+            label: Twitter/X URL
+            widget: string
+          - name: profile_linkedin
+            label: LinkedIn URL
+            widget: string
+          - name: profile_email
+            label: Email
+            widget: string
+          - name: profile_location
+            label: Location
+            widget: string
+            required: false
+          - name: profile_website
+            label: Website
+            widget: string
+            required: false
       - name: general
-        label: General
+        label: Content Settings
         file: src/content/settings/general.yml
         fields:
           - name: site_title
