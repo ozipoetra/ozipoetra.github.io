@@ -191,6 +191,36 @@ collections:
           - name: hero_description
             label: Hero Description
             widget: text
+          - name: hero_button1_text
+            label: Hero Button 1 Text
+            widget: string
+          - name: hero_button1_link
+            label: Hero Button 1 Link
+            widget: string
+          - name: hero_button2_text
+            label: Hero Button 2 Text
+            widget: string
+          - name: hero_button2_link
+            label: Hero Button 2 Link
+            widget: string
+          - name: about_badge
+            label: About Badge
+            widget: string
+          - name: about_title
+            label: About Title
+            widget: string
+          - name: about_bio1
+            label: About Bio 1
+            widget: text
+          - name: about_bio2
+            label: About Bio 2
+            widget: text
+          - name: about_button_text
+            label: About Button Text
+            widget: string
+          - name: footer_tagline
+            label: Footer Tagline
+            widget: string
           - name: contact_email
             label: Contact Email
             widget: string
@@ -200,6 +230,9 @@ collections:
           - name: newsletter_description
             label: Newsletter Description
             widget: text
+          - name: newsletter_button_text
+            label: Newsletter Button Text
+            widget: string
           - name: newsletter_readers
-            label: Newsletter Readers Count
+            label: Newsletter Readers Text
             widget: string
