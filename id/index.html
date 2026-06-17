@@ -242,6 +242,8 @@
     }, 50);
   });
 </script> <main class="flex-1 w-full pt-16">  <section class="hero-section -mt-16 relative w-full min-h-screen flex items-center justify-center overflow-hidden" data-astro-cid-2ltb2oys> <div class="hero-canvas-wrapper" data-astro-cid-4zothrxl> <canvas id="hero-canvas" data-astro-cid-4zothrxl></canvas> </div> <script>
+  var heroAnimFrameId = null;
+
   function initHeroCanvas() {
     var canvas = document.getElementById('hero-canvas');
     if (!canvas || canvas.dataset.initialized) return;
@@ -249,6 +251,7 @@
 
     import('https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js').then(function(THREE_MODULE) {
       var THREE = THREE_MODULE;
+      var disposed = false;
 
       function getSphereScale() {
         var w = window.innerWidth;
@@ -335,7 +338,8 @@
 
       var clock = new THREE.Clock();
       function animate() {
-        requestAnimationFrame(animate);
+        if (disposed) return;
+        heroAnimFrameId = requestAnimationFrame(animate);
         var elapsed = clock.getElapsedTime();
 
         icoMesh.rotation.y = elapsed * 0.15;
@@ -361,6 +365,17 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Cleanup on page leave (view transition)
+      document.addEventListener('astro:before-swap', function cleanup() {
+        disposed = true;
+        if (heroAnimFrameId) {
+          cancelAnimationFrame(heroAnimFrameId);
+          heroAnimFrameId = null;
+        }
+        renderer.dispose();
+        document.removeEventListener('astro:before-swap', cleanup);
       });
     });
   }
