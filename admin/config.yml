@@ -160,7 +160,7 @@ collections:
     files:
       - name: site
         label: Site
-        file: src/content/settings/general.yml
+        file: src/content/settings/settings.yml
         fields:
           - name: site_title
             label: Site Title
@@ -173,7 +173,7 @@ collections:
             widget: text
       - name: navbar
         label: Navbar
-        file: src/content/settings/general.yml
+        file: src/content/settings/settings.yml
         fields:
           - name: navbar_items
             label: Navigation Links
@@ -198,7 +198,7 @@ collections:
             widget: string
       - name: profile
         label: Profile
-        file: src/content/settings/general.yml
+        file: src/content/settings/profile.yml
         fields:
           - name: profile_name
             label: Display Name
