@@ -199,8 +199,8 @@ collections:
             label: Navigation Links
             widget: list
             fields:
-              - name: label
-                label: Label
+              - name: key
+                label: Translation Key
                 widget: string
               - name: path
                 label: Path
