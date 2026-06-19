@@ -15,6 +15,17 @@ backend:
 media_folder: "/src/assets/media"
 public_folder: "@/assets/media"
 
+media_libraries:
+  all:
+    max_file_size: 5120000
+
+slug:
+  encoding: unicode
+  clean_accents: false
+  sanitize_replacement: '-'
+  trim: true
+  lowercase: true
+
 i18n:
   structure: multiple_folders
   locales: [en, id, zh-CN, ru]
@@ -23,6 +34,8 @@ i18n:
 collections:
   - name: blog
     label: Blog Posts
+    label_singular: Blog Post
+    icon: article
     folder: src/content/blog
     preview_path: "/{{locale}}/blog/{{slug}}"
     i18n: true
@@ -71,6 +84,8 @@ collections:
 
   - name: projects
     label: Projects
+    label_singular: Project
+    icon: code
     folder: src/content/projects
     preview_path: "/{{locale}}/projects/{{slug}}"
     i18n: true
@@ -125,6 +140,8 @@ collections:
 
   - name: pages
     label: Pages
+    label_singular: Page
+    icon: description
     folder: src/content/pages
     i18n: true
     fields:
@@ -155,8 +172,11 @@ collections:
         widget: markdown
         i18n: true
 
+  - divider: true
+
   - name: settings
     label: Site Settings
+    icon: settings
     files:
       - name: site
         label: Site
@@ -193,9 +213,6 @@ collections:
             label: Show Contact Button
             widget: boolean
             default: true
-          - name: navbar_contact_text
-            label: Contact Button Text
-            widget: string
       - name: profile
         label: Profile
         file: src/content/settings/profile.yml
@@ -212,10 +229,6 @@ collections:
           - name: profile_picture
             label: Profile Picture
             widget: image
-            media_library:
-              config:
-                max_file_size: 5120000
-                multiple: false
           - name: profile_github
             label: GitHub URL
             widget: string
