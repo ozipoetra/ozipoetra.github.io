@@ -240,48 +240,11 @@ collections:
         label: Home Page Settings
         file: src/content/settings/general.yml
         fields:
-          - name: hero_tagline
-            label: Hero Tagline
-            widget: string
-          - name: hero_title
-            label: Hero Title
-            widget: string
-          - name: hero_button1_text
-            label: Hero Button 1 Text
-            widget: string
           - name: hero_button1_link
             label: Hero Button 1 Link
             widget: string
-          - name: hero_button2_text
-            label: Hero Button 2 Text
-            widget: string
           - name: hero_button2_link
             label: Hero Button 2 Link
-            widget: string
-          - name: about_badge
-            label: About Badge
-            widget: string
-          - name: about_title
-            label: About Title
-            widget: string
-          - name: about_bio2
-            label: About Bio (extra)
-            widget: text
-            required: false
-          - name: about_button_text
-            label: About Button Text
-            widget: string
-          - name: newsletter_title
-            label: Newsletter Title
-            widget: string
-          - name: newsletter_description
-            label: Newsletter Description
-            widget: text
-          - name: newsletter_button_text
-            label: Newsletter Button Text
-            widget: string
-          - name: newsletter_readers
-            label: Newsletter Readers Text
             widget: string
       - name: i18n
         label: Languages
