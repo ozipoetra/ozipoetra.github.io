@@ -236,16 +236,6 @@ collections:
             label: Website
             widget: string
             required: false
-      - name: homepage
-        label: Home Page Settings
-        file: src/content/settings/general.yml
-        fields:
-          - name: hero_button1_link
-            label: Hero Button 1 Link
-            widget: string
-          - name: hero_button2_link
-            label: Hero Button 2 Link
-            widget: string
       - name: i18n
         label: Languages
         file: src/content/settings/i18n.yml
