@@ -152,13 +152,13 @@
     return 'en';
   }
 
-  function checkIsHomepage() {
+  function checkIsTransparentPage() {
     var path = window.location.pathname;
     var segments = path.split('/').filter(Boolean);
     var locale = segments[0];
     var locales = getEnabledLocales();
     if (locales.indexOf(locale) === -1) return false;
-    return segments.length === 1;
+    return segments.length === 1 || (segments.length === 2 && segments[1] === 'about');
   }
 
   function updateNavLinks() {
@@ -192,15 +192,15 @@
     var navbarInner = document.getElementById('navbar-inner');
     if (!navbar || !navbarInner) return;
 
-    var isHomepage = checkIsHomepage();
+    var isTransparentPage = checkIsTransparentPage();
 
-    if (isHomepage) {
+    if (isTransparentPage) {
       navbar.classList.add('navbar-hero');
     } else {
       navbar.classList.remove('navbar-hero');
     }
 
-    if (isHomepage) {
+    if (isTransparentPage) {
       var currentScrollY = window.scrollY;
       var heroHeight = window.innerHeight - 64;
       if (currentScrollY > heroHeight * 0.3) {
