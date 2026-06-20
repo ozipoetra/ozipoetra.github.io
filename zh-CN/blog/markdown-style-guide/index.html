@@ -309,16 +309,16 @@
 <h3 id="语法-4">语法</h3>
 <p>我们可以在新行中使用 3 个反引号 ```，编写代码片段，并在新行中以 3 个反引号结束。要高亮显示特定语言的语法，请在开头的 3 个反引号后写上语言名称，例如 html、javascript、css、markdown、typescript、txt、bash</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">```html</span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;!</span><span style="color:#22863A;--shiki-dark:#85E89D">doctype</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> html</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">html</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> lang</span><span style="color:#24292E;--shiki-dark:#E1E4E8">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"en"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">head</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">meta</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> charset</span><span style="color:#24292E;--shiki-dark:#E1E4E8">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"utf-8"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> /></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">title</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>Example HTML5 Document&#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">title</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">head</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">body</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">p</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>Test&#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">p</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">body</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">html</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;!doctype html></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;html lang="en"></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;head></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;meta charset="utf-8" /></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;title>Example HTML5 Document&#x3C;/title></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;/head></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;body></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;p>Test&#x3C;/p></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  &#x3C;/body></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;/html></span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">```</span></span></code></pre>
 <h3 id="输出-4">输出</h3>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;!</span><span style="color:#22863A;--shiki-dark:#85E89D">doctype</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> html</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
