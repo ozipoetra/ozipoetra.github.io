@@ -4,7 +4,7 @@ backend:
   name: github
   base_url: https://sveltia-cms-auth.ozi.workers.dev
   repo: ozipoetra/astro-blog
-  branch: main
+  branch: dev/shakib
   commit_messages:
     create: Create {{collection}} "{{slug}}"
     update: Update {{collection}} "{{slug}}"
@@ -12,8 +12,10 @@ backend:
     uploadMedia: Upload "{{path}}"
     deleteMedia: Delete "{{path}}"
 
-media_folder: "/src/assets/media"
-public_folder: "/assets/media"
+# Where uploads go (repo-relative). public_folder is the prefix written into frontmatter.
+# Content uses '@/assets/media/...' so CMS must write the same format for Astro image() to resolve.
+media_folder: src/assets/media
+public_folder: '@/assets/media'
 
 media_libraries:
   all:
@@ -37,7 +39,12 @@ collections:
     label_singular: Blog Post
     icon: article
     folder: src/content/blog
-    preview_path: "/{{locale}}/blog/{{slug}}"
+    extension: md
+    format: frontmatter
+    create: true
+    preview_path: /{{locale}}/blog/{{slug}}
+    summary: '{{title}}'
+    sortable_fields: ['title', 'pubDate']
     i18n: true
     fields:
       - name: title
@@ -77,6 +84,138 @@ collections:
         label: Tags
         widget: list
         i18n: duplicate
+        allow_add: true
+      - name: body
+        label: Body
+        widget: markdown
+        i18n: true
+
+  - name: services
+    label: Services
+    label_singular: Service
+    icon: home_repair_service
+    folder: src/content/services
+    extension: md
+    format: frontmatter
+    create: true
+    preview_path: /{{locale}}/services/{{slug}}
+    summary: '{{title}}'
+    sortable_fields: ['title', 'order']
+    i18n: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+        i18n: true
+      - name: description
+        label: Short Description
+        widget: text
+        i18n: true
+      - name: category
+        label: Category
+        widget: select
+        i18n: duplicate
+        options:
+          - phone-repair
+          - web-dev
+        default: phone-repair
+      - name: icon
+        label: Icon
+        widget: select
+        i18n: duplicate
+        default: smartphone
+        options:
+          - smartphone
+          - cpu
+          - download
+          - zap
+          - unlock
+          - rocket
+          - layout
+          - code
+          - tablet
+      - name: brands
+        label: Brands
+        widget: select
+        i18n: duplicate
+        multiple: true
+        required: false
+        options:
+          - xiaomi
+          - redmi
+          - poco
+          - infinix
+          - tecno
+          - itel
+          - oneplus
+          - oppo
+          - realme
+          - samsung
+          - vivo
+          - iqoo
+      - name: symptoms
+        label: Symptoms (phone-repair)
+        widget: list
+        i18n: duplicate
+        required: false
+        allow_add: true
+      - name: technologies
+        label: Technologies (web-dev)
+        widget: list
+        i18n: duplicate
+        required: false
+        allow_add: true
+      - name: price_from
+        label: Price From
+        widget: number
+        i18n: duplicate
+        default: 0
+        min: 0
+      - name: price_unit
+        label: Currency
+        widget: select
+        i18n: duplicate
+        default: IDR
+        options:
+          - IDR
+          - USD
+      - name: duration
+        label: Duration
+        widget: string
+        i18n: duplicate
+        default: 30–90 min
+      - name: remote
+        label: Remote Available
+        widget: boolean
+        i18n: duplicate
+        default: true
+      - name: requirements
+        label: Requirements
+        widget: list
+        i18n: duplicate
+        required: false
+        allow_add: true
+      - name: deliverables
+        label: Deliverables
+        widget: list
+        i18n: duplicate
+        required: false
+        allow_add: true
+      - name: featured
+        label: Featured on Homepage
+        widget: boolean
+        i18n: duplicate
+        default: false
+      - name: order
+        label: Sort Order
+        widget: number
+        i18n: duplicate
+        default: 0
+      - name: heroImage
+        label: Hero Image
+        widget: image
+        i18n: duplicate
+        required: false
       - name: body
         label: Body
         widget: markdown
@@ -87,7 +226,11 @@ collections:
     label_singular: Project
     icon: code
     folder: src/content/projects
-    preview_path: "/{{locale}}/projects/{{slug}}"
+    extension: md
+    format: frontmatter
+    create: true
+    preview_path: /{{locale}}/projects/{{slug}}
+    summary: '{{title}}'
     i18n: true
     fields:
       - name: title
@@ -102,7 +245,7 @@ collections:
         label: Icon
         widget: string
         i18n: false
-        default: "🚀"
+        default: 🚀
       - name: technologies
         label: Technologies
         widget: list
@@ -143,6 +286,10 @@ collections:
     label_singular: Page
     icon: description
     folder: src/content/pages
+    extension: md
+    format: frontmatter
+    create: true
+    summary: '{{title}}'
     i18n: true
     fields:
       - name: title
@@ -179,7 +326,7 @@ collections:
     icon: settings
     files:
       - name: site
-        label: Site
+        label: Site & Navbar
         file: src/content/settings/settings.yml
         fields:
           - name: site_title
@@ -191,10 +338,6 @@ collections:
           - name: site_description
             label: Site Description
             widget: text
-      - name: navbar
-        label: Navbar
-        file: src/content/settings/settings.yml
-        fields:
           - name: navbar_items
             label: Navigation Links
             widget: list
@@ -229,18 +372,31 @@ collections:
           - name: profile_picture
             label: Profile Picture
             widget: image
+            required: false
           - name: profile_github
             label: GitHub URL
             widget: string
+            required: false
           - name: profile_twitter
             label: Twitter/X URL
             widget: string
+            required: false
           - name: profile_linkedin
             label: LinkedIn URL
             widget: string
+            required: false
           - name: profile_email
             label: Email
             widget: string
+            required: false
+          - name: profile_whatsapp
+            label: WhatsApp Number
+            widget: string
+            required: false
+          - name: profile_telegram
+            label: Telegram URL
+            widget: string
+            required: false
           - name: profile_location
             label: Location
             widget: string
@@ -280,7 +436,7 @@ collections:
                 widget: boolean
                 default: true
       - name: translations_en
-        label: "English Translations"
+        label: English Translations
         file: src/i18n/en.json
         format: json
         fields:
@@ -291,7 +447,7 @@ collections:
             key_label: Key
             value_label: Value
       - name: translations_id
-        label: "Bahasa Indonesia Translations"
+        label: Bahasa Indonesia Translations
         file: src/i18n/id.json
         format: json
         fields:
@@ -302,7 +458,7 @@ collections:
             key_label: Key
             value_label: Value
       - name: translations_zhcn
-        label: "简体中文 Translations"
+        label: 简体中文 Translations
         file: src/i18n/zh-CN.json
         format: json
         fields:
@@ -313,7 +469,7 @@ collections:
             key_label: Key
             value_label: Value
       - name: translations_ru
-        label: "Русский Translations"
+        label: Русский Translations
         file: src/i18n/ru.json
         format: json
         fields:
